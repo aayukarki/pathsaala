@@ -33,7 +33,7 @@ export default function Component() {
         <Container>
           <Hero title={'Front Page'} />
           <div className="text-center bg-red-500">
-            <p>This page is utilizing the "front-page" WordPress template for Pathsaala.</p>
+            <p className="text-blue-500">This page is utilizing the "front-page" WordPress template for Pathsaala.</p>
             <code>wp-templates/front-page.js</code>
           </div>
         </Container>
