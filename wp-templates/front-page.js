@@ -1,8 +1,12 @@
 import { useQuery, gql } from '@apollo/client';
 import * as MENUS from '../constants/menus';
 import { BlogInfoFragment } from '../fragments/GeneralSettings';
-import Image from 'next/image';
+import Image from 'next/future/image';
 import Link from 'next/link';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import { useEffect } from 'react';
+
 import {
   Header,
   Footer,
@@ -12,12 +16,22 @@ import {
   Hero,
   SEO,
 } from '../components';
-import classNames from 'classnames';
 
 export default function Component() {
   const { data } = useQuery(Component.query, {
     variables: Component.variables(),
   });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 2000, // Animation duration
+      once: true, // Animation will only happen once while scrolling down
+    });
+  }, []);
+
+  const goToTop = () => {
+    console.log('gone to top');
+  }
 
   const { title: siteTitle, description: siteDescription } =
     data?.generalSettings;
@@ -118,7 +132,7 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="relative py-32">
+        <section className="relative py-32" data-aos="fade-up">
           <div className="container">
             <div className="flex gap-x-10">
               <div className="w-1/2 bg-[#ce1127] text-white px-10 rounded-xl">
@@ -304,6 +318,7 @@ export default function Component() {
             />
           </div>
         </section> */}
+        <button onClick={goToTop}>Go To Top</button>
 
         <section className="bg-[#013893] text-white relative py-32">
           <div className="container">
