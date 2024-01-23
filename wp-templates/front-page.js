@@ -6,6 +6,9 @@ import Link from 'next/link';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useEffect } from 'react';
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 import {
   Header,
@@ -18,6 +21,14 @@ import {
 } from '../components';
 
 export default function Component() {
+  var settings = {
+    dots: true,
+    infinite: true,
+    speed: 500,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
   const { data } = useQuery(Component.query, {
     variables: Component.variables(),
   });
@@ -97,6 +108,26 @@ export default function Component() {
               </div>
               <div className="relative w-1/2 px-10">
                 <p className='text-2xl leading-none bg-[#fdd116] text-black text-center font-bold rounded-full py-4 mb-8'>नेपाली वर्णमाला</p>
+                <Slider {...settings}>
+                  <div>
+                    <h3>1</h3>
+                  </div>
+                  <div>
+                    <h3>2</h3>
+                  </div>
+                  <div>
+                    <h3>3</h3>
+                  </div>
+                  <div>
+                    <h3>4</h3>
+                  </div>
+                  <div>
+                    <h3>5</h3>
+                  </div>
+                  <div>
+                    <h3>6</h3>
+                  </div>
+                </Slider>
                 <div className="flex flex-wrap -mx-4">
                   <div className='w-1/2 px-4'>
                     <div className='bg-white rounded-3xl p-5 overflow-hidden'>
