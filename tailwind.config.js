@@ -8,7 +8,15 @@ module.exports = {
     "./wp-templates/**/*.{js,ts,jsx,tsx,mdx}",
   ],
   theme: {
-    extend: {},
+    container: {
+      center: true,
+      padding: '1.25rem',
+    },
+    extend: {      
+      fontFamily: {
+        libre: ['"Libre Baskerville", serif'],
+      }
+    },
   },
   plugins: [],
 }

@@ -14,16 +14,36 @@ export default function Header({
   const [isNavShown, setIsNavShown] = useState(false);
 
   return (
-    <header className={cx('component')}>
+    <header className="relative py-5">
       <SkipNavigationLink />
-        <Container>
-          <div className={cx('navbar')}>
-            <div className={cx('brand')}>
-              <Link href="/">
-                <a className={cx('title')}>{title}</a>
-              </Link>
-              {description && <p className={cx('description')}>{description}</p>}
-            </div>
+      <div className='container'>
+        <div className="flex justify-between items-center">
+          <div className={cx('brand')}>
+            <Link href="/">
+              {/* <a className={cx('title')}>{title}</a> */}
+              <a className='font-bold leading-none'>Pathshala</a>
+            </Link>
+            {description && <p className={cx('description')}>{description}</p>}
+          </div>
+          <nav>
+            <ul className='flex justify-center items-center gap-x-8'>
+              <li><a href='#'>About</a></li>
+              <li><a href='#'>Events</a></li>
+              <li><a href='#'>Reviews</a></li>
+              <li><a href='#'>FAQs</a></li>
+              <li><a href='#'>Admissions</a></li>
+              <li><a href='#'>Resources</a></li>
+            </ul>
+          </nav>
+          {/* <NavigationMenu
+            className={cx(['primary-navigation', isNavShown ? 'show' : undefined])}
+            menuItems={menuItems}
+          /> */}
+          <div>
+            <Link href="#">
+              <a className="inline-block rounded-full bg-[#fdd116] px-8 py-3 font-bold text-black shadow-sm hover:text-white hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                Contact Us</a>
+            </Link>
             <button
               type="button"
               className={cx('nav-toggle')}
@@ -34,12 +54,9 @@ export default function Header({
             >
               ☰
             </button>
-            <NavigationMenu
-              className={cx(['primary-navigation', isNavShown ? 'show' : undefined])}
-              menuItems={menuItems}
-            />
+          </div>
         </div>
-      </Container>
+      </div>
     </header>
   );
 }

@@ -8,8 +8,9 @@ let cx = className.bind(styles);
 export default function Hero({ title, level = 'h2', children, className }) {
   return (
     <div className={cx(['component', className])}>
-      <Heading level={level}>
-        <span className={cx('title')}>{title}</span>
+      <Heading className="text-4xl font-bold tracking-tight text-gray-900 sm:text-6xl" level={level}>
+        {title}
+        <span className={cx('title')}></span>
       </Heading>
       {children}
     </div>
