@@ -57,3 +57,10 @@ img {
 	color: var(--wpe--color--white);
 	background-color: var(--wpe--color--accent);
 }
+
+.banner-slider .slick-slider,
+.banner-slider .slick-list,
+.banner-slider .slick-track,
+.banner-slider .slick-slide>div {
+	height: inherit;
+}

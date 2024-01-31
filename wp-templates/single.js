@@ -4,6 +4,7 @@ import { BlogInfoFragment } from '../fragments/GeneralSettings';
 import {
   Header,
   Footer,
+  FooterMenu,
   Main,
   Container,
   EntryHeader,
@@ -49,6 +50,7 @@ export default function Component(props) {
             <ContentWrapper content={content} />
           </Container>
         </>
+        <FooterMenu />
       </Main>
       <Footer title={siteTitle} menuItems={footerMenu} />
     </>

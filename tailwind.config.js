@@ -12,9 +12,13 @@ module.exports = {
       center: true,
       padding: '1.25rem',
     },
-    extend: {      
+    extend: {  
+      screens: {
+        '2xl': '1300px'
+      },    
       fontFamily: {
         libre: ['"Libre Baskerville", serif'],
+        rammetto: ['"Rammetto One", serif'],
       }
     },
   },

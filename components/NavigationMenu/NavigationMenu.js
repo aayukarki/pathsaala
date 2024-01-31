@@ -18,7 +18,7 @@ export default function NavigationMenu({ menuItems, className }) {
 
   function renderMenu(items) {
     return (
-      <ul className={cx('menu')}>
+      <ul className='flex justify-center items-center gap-x-8'>
         {items.map((item) => {
           const { id, path, label, children, cssClasses } = item;
 

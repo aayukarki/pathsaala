@@ -1,47 +1,46 @@
 import { useState } from 'react';
 import classNames from 'classnames/bind';
 import Link from 'next/link';
+import Image from 'next/future/image';
 import { Container, NavigationMenu, SkipNavigationLink } from '../../components';
 import styles from './Header.module.scss';
 
 let cx = classNames.bind(styles);
 
 export default function Header({
-  title = 'Headless by WP Engine',
+  title = 'Pathshala',
   description,
   menuItems
 }) {
   const [isNavShown, setIsNavShown] = useState(false);
 
   return (
-    <header className="relative py-5">
+    <header className="relative py-5 shadow-md shadow-gray-100">
       <SkipNavigationLink />
       <div className='container'>
         <div className="flex justify-between items-center">
-          <div className={cx('brand')}>
+          <div className={`flex flex-row items-center ${cx('brand')}`}>
+            <Image
+              src="/images/logo.png" // Assuming your image is in public/images
+              alt="Description"
+              className='w-[100px]'
+              width={233}
+              height={188}
+            />
             <Link href="/">
               {/* <a className={cx('title')}>{title}</a> */}
-              <a className='font-bold leading-none'>Pathshala</a>
+              <a className='font-rammetto leading-none text-lg text-[#1785c6]'>Pathshala<br /><span className='tracking-wider'>Australia</span>
+              </a>
             </Link>
             {description && <p className={cx('description')}>{description}</p>}
           </div>
-          <nav>
-            <ul className='flex justify-center items-center gap-x-8'>
-              <li><a href='#'>About</a></li>
-              <li><a href='#'>Events</a></li>
-              <li><a href='#'>Reviews</a></li>
-              <li><a href='#'>FAQs</a></li>
-              <li><a href='#'>Admissions</a></li>
-              <li><a href='#'>Resources</a></li>
-            </ul>
-          </nav>
-          {/* <NavigationMenu
+          <NavigationMenu
             className={cx(['primary-navigation', isNavShown ? 'show' : undefined])}
             menuItems={menuItems}
-          /> */}
+          />
           <div>
-            <Link href="#">
-              <a className="inline-block rounded-full bg-[#fdd116] px-8 py-3 font-bold text-black shadow-sm hover:text-white hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+            <Link href="/contact-us/">
+              <a className="inline-block rounded-full bg-[#ed3d36] px-8 py-3 font-bold text-white shadow-sm  hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Contact Us</a>
             </Link>
             <button

@@ -8,10 +8,13 @@ export default function Footer({ title, menuItems }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#012f7c] text-white py-8">
+    <footer className="bg-[#ed3d36] text-white pb-10">
       <div className="container">
-        <NavigationMenu menuItems={menuItems} />
-        <p className="mb-0">{`${title} © ${year}. Powered by WordPress.`}</p>
+        <div className='flex justify-between text-sm'>
+          {/* <NavigationMenu menuItems={menuItems} /> */}
+          <p className="mb-0">{`${title} © ${year}. All Rights Reserved`}</p>
+          <p className="mb-0">Site Developed and Designed By: <span className='font-rammetto'>AK & AR</span></p>
+        </div>
       </div>
     </footer>
   );

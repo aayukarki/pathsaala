@@ -13,6 +13,7 @@ import "slick-carousel/slick/slick-theme.css";
 import {
   Header,
   Footer,
+  FooterMenu,
   Main,
   Container,
   NavigationMenu,
@@ -22,9 +23,23 @@ import {
 
 export default function Component() {
   var settings = {
-    dots: true,
+    arrows: false,
+    dots: false,
     infinite: true,
-    speed: 500,
+    autoplay: true,
+    autoplaySpeed: 2000,
+    vertical: true,
+    verticalSwiping: true,
+    slidesToShow: 1,
+    slidesToScroll: 1
+  };
+
+  var bannersettings = {
+    arrows: false,
+    dots: false,
+    infinite: true,
+    autoplay: true,
+    autoplaySpeed: 5000,
     slidesToShow: 1,
     slidesToScroll: 1
   };
@@ -35,17 +50,15 @@ export default function Component() {
 
   useEffect(() => {
     AOS.init({
-      duration: 2000, // Animation duration
-      once: true, // Animation will only happen once while scrolling down
+      duration: 1000, // Animation duration
     });
   }, []);
 
-  const goToTop = () => {
-    console.log('gone to top');
-  }
-
-  const { title: siteTitle, description: siteDescription } =
-    data?.generalSettings;
+  const { title: siteTitle, description: siteDescription } = data?.generalSettings;
+  // Extract heading and subHeading
+  const { heading, subHeading } = data?.page?.bannerFields || {};
+  const { whyUs } = data?.page?.frontPage || {};
+  const testimonials = data?.testimonials?.nodes;
   const primaryMenu = data?.headerMenuItems?.nodes ?? [];
   const footerMenu = data?.footerMenuItems?.nodes ?? [];
 
@@ -91,150 +104,170 @@ export default function Component() {
         menuItems={primaryMenu}
       />
       <Main>
-        <section className="relative bg-black text-white py-32 md:py-44 z-10 overflow-hidden">
+        <section className="relative bg-[#1785c6] text-white py-32 md:py-44 z-10 overflow-hidden">
           <div className="container">
             <div className="flex flex-wrap justify-between items-center -mx-10">
               <div className="w-1/2 px-10">
                 {/* <Hero title={'Front Page'} /> */}
-                <h1 className='font-libre text-5xl font-bold'>Nepalese Community Language School</h1>
-                <p className="mt-10 mb-0 text-lg">
-                  A Community School Dedicated to Preserving Heritage and Nurturing Future Leaders through Education and Cultural Enrichment
-                </p>
-                <Link href="#">
-                  <a className="inline-block rounded-full bg-[#fdd116] px-8 py-3 mt-10 font-bold text-black shadow-sm hover:text-white hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                    Start Learning
-                  </a>
-                </Link>
+                <h1 className='font-rammetto text-5xl' data-aos="fade-right">{heading}</h1>
+                <p className="mt-10 mb-0 text-lg" data-aos="fade-right">{subHeading}</p>
+                <div className='flex flex-unwrap gap-x-4'>
+                  <Link href="#">
+                    <a data-aos="fade-right" className="w-[180px] text-center inline-block rounded-full bg-[#ed3d36] p-3 mt-10 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      Enrol Now
+                    </a>
+                  </Link>
+                  <Link href="#">
+                    <a data-aos="fade-right" className="w-[180px] text-center inline-block rounded-full border border-white p-3 mt-10 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                      Discover More
+                    </a>
+                  </Link>
+                </div>
               </div>
               <div className="relative w-1/2 px-10">
-                <p className='text-2xl leading-none bg-[#fdd116] text-black text-center font-bold rounded-full py-4 mb-8'>नेपाली वर्णमाला</p>
-                <Slider {...settings}>
-                  <div>
-                    <h3>1</h3>
-                  </div>
-                  <div>
-                    <h3>2</h3>
-                  </div>
-                  <div>
-                    <h3>3</h3>
-                  </div>
-                  <div>
-                    <h3>4</h3>
-                  </div>
-                  <div>
-                    <h3>5</h3>
-                  </div>
-                  <div>
-                    <h3>6</h3>
-                  </div>
-                </Slider>
+                {/* <p className='text-3xl leading-none bg-white text-black text-center font-bold rounded-full py-4 mb-8 flex justify-center items-center gap-x-2'>नेपाली वर्णमाला (Nepali Alphabet)</p>
                 <div className="flex flex-wrap -mx-4">
                   <div className='w-1/2 px-4'>
-                    <div className='bg-white rounded-3xl p-5 overflow-hidden'>
-                      <p className='text-[200px] leading-none font-bold text-gray-800 text-center py-3 mb-0'>अ</p>
-                      <p className='text-2xl leading-none bg-[#ce1127] text-center font-bold py-3 rounded-full mb-0'>स्वर</p>
+                    <div className='bg-[#ed3d36] text-black rounded-3xl p-5 overflow-hidden'>
+                      <Slider {...settings}>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>अ</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>आ</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>इ</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>ई</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>उ</p>
+                      </Slider>
+                      <p className='text-lg leading-none bg-white text-center font-bold py-3 rounded-full mb-0'>स्वर (Vowels)</p>
                     </div>
                   </div>
                   <div className='w-1/2 px-4'>
-                    <div className='bg-white rounded-3xl p-5 overflow-hidden'>
-                      <p className='text-[200px] leading-none font-bold text-gray-800 text-center py-3 mb-0'>क</p>
-                      <p className='text-2xl leading-none bg-[#013893] text-center font-bold py-3 rounded-full mb-0'> व्यंजन </p>
+                    <div className='bg-[#ed3d36] text-black rounded-3xl p-5 overflow-hidden'>
+                      <Slider {...settings}>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>क</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>ख</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>ग</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>घ</p>
+                        <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>ङ</p>
+                      </Slider>
+                      <p className='text-lg leading-none bg-white text-center font-bold py-3 rounded-full mb-0'> व्यंजन (Consonants)</p>
                     </div>
                   </div>
-                  {/* <div id="alphabet-slider" className="z-10 absolute top-0 left-0 w-full h-full flex flex-wrap justify-between text-4xl text-white leading-none p-16">
-                    <span>क</span>
-                    <span>ख</span>
-                    <span>ग</span>
-                    <span>घ</span>
-                    <span>इं</span>
-                  </div> */}
-                </div>
+                </div> */}
               </div>
             </div>
           </div>
-          <div className='absolute left-0 top-0 w-full h-full -z-10 opacity-40'>
+          <div className='banner-slider absolute end-0 top-0 h-full w-[850px]'>
+            <Slider {...bannersettings}>
+              <div className='relative h-full'>
+                <Image
+                  src="/images/banner2.jpg" // Assuming your image is in public/images
+                  alt="Description"
+                  className='w-full h-full object-cover'
+                  width={1280}
+                  height={720}
+                />
+                <p className='absolute bottom-0 left-0 bg-black/40 mb-0 p-5 w-full text-xl text-center font-medium capitalize'>Local MP को अफिसमा पाठशाला अष्ट्रेलियाको तर्फबाट भेटघाट गरियो</p>
+              </div>
+              <div className='relative h-full'>
+                <Image
+                  src="/images/banner1.jpg" // Assuming your image is in public/images
+                  alt="Description"
+                  className='w-full h-full object-cover'
+                  width={1280}
+                  height={720}
+                />
+                <p className='absolute bottom-0 left-0 bg-black/40 mb-0 p-5 w-full text-xl text-center font-medium capitalize'>Yearly certificate distribution ceremony 2023</p>
+              </div>
+              <div className='relative h-full'>
+                <Image
+                  src="/images/banner3.jpg" // Assuming your image is in public/images
+                  alt="Description"
+                  className='w-full h-full object-cover'
+                  width={1280}
+                  height={720}
+                />
+                <p className='absolute bottom-0 left-0 bg-black/40 mb-0 p-5 w-full text-xl text-center font-medium capitalize'>Pathasala Australia Penshurt First day of class</p>
+              </div>
+              <div className='relative h-full'>
+                <Image
+                  src="/images/banner4.jpg" // Assuming your image is in public/images
+                  alt="Description"
+                  className='w-full h-full object-cover'
+                  width={1280}
+                  height={720}
+                />
+                <p className='absolute bottom-0 left-0 bg-black/40 mb-0 p-5 w-full text-xl text-center font-medium capitalize'>Pathasala Australia को Penshurt Branch को उद्घाटन कार्यक्रमः</p>
+              </div>
+            </Slider>
+          </div>
+          <div className='absolute bottom-0 -left-5 opacity-10 -z-10'>
             <Image
-              src="/images/banner-bg.jpg" // Assuming your image is in public/images
+              src="/images/banner-bg.png" // Assuming your image is in public/images
               alt="Description"
-              className='!h-full !w-full object-cover'
-              width={1920}
-              height={800}
+              className=''
+              width={626}
+              height={317}
             />
           </div>
         </section>
-
-        <section className="relative py-32" data-aos="fade-up">
+        <section className="bg-gray-100 relative py-32">
           <div className="container">
-            <div className="flex gap-x-10">
-              <div className="w-1/2 bg-[#ce1127] text-white px-10 rounded-xl">
-                <div className="flex items-center gap-x-10">
-                  <div className="w-3/4 -mt-10 -mb-1">
-                    <Image
-                      src="/images/girl.png" // Assuming your image is in public/images
-                      alt="Description"
-                      width={640}
-                      height={945}
-                    />
-                  </div>
-                  <div className="w-full">
-                    <p className="text-lg font-semibold leading-none">
-                      Global Impact
-                    </p>
-                    <p className="font-libre text-3xl font-bold leading-none">
-                      Language Academy Reach
-                    </p>
-                    <p>
-                      Our language academy extends its influence worldwide, with alumni and students hailing from diverse corners of the globe. This global community fosters cross-cultural connections and enriches the learning experience, creating a network that transcends borders.
-                    </p>
-                  </div>
-                </div>
-              </div>
-              <div className="w-1/2 bg-[#ce1127] text-white px-10 rounded-xl">
-                <div className="flex items-center gap-x-10">
-                  <div className="w-3/4 -mt-10 -mb-2">
-                    <Image
-                      src="/images/boy.png" // Assuming your image is in public/images
-                      alt="Description"
-                      width={640}
-                      height={945}
-                    />
-                  </div>
-                  <div className="w-full">
-                    <p className="text-lg font-semibold leading-none">
-                      Innovative Pedagogy
-                    </p>
-                    <p className="font-libre text-3xl font-bold leading-none">
-                      Cutting-edge Teaching Methods
-                    </p>
-                    <p>
-                      At our language academy, we embrace innovation in education. From immersive language programs to interactive online platforms, we ensure our students receive a dynamic and effective learning experience.
-                    </p>
+            <div className="w-2/3 mx-auto mb-20 text-center">
+              <p className="mt-6 text-lg font-semibold text-[#ed3d36]" data-aos="fade-up">
+                What We Offer
+              </p>
+              <h2 className="font-rammetto mt-2 text-4xl text-gray-900" data-aos="fade-up">
+                Language, Culture Learning and Community Bond
+              </h2>
+            </div>
+            <div className="flex flex-unwrap gap-x-10">
+              {whyUs.map((value, index) => (
+                <div key={value.heading} className={`w-1/3 ${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-[#ed3d36]'} text-white rounded-xl overflow-hidden`} data-aos="zoom-in">
+                  <div className="flex flex-col">
+                    <div className="w-full h-[260px] overflow-hidden">
+                      <Image
+                        src={value.image.node.sourceUrl}
+                        alt={value.image.node.altText || 'Description'}
+                        className="w-full h-full object-cover"
+                        width={640}
+                        height
+                        ={945}
+                      />
+                    </div>
+                    <div className="w-full p-10">
+                      <p className="text-lg font-semibold leading-none">
+                        {value.subHeading}
+                      </p>
+                      <p className="font-rammetto text-2xl leading-none">
+                        {value.heading}
+                      </p>
+                      <div dangerouslySetInnerHTML={{ __html: value.description }} />
+                    </div>
                   </div>
                 </div>
-              </div>
+              ))}
             </div>
           </div>
         </section>
 
-        <section className="relative pb-32">
+        <section className="relative py-32">
           <div className="container">
-            <div className="w-2/3  mx-auto mb-20 text-center">
-              <p className="mt-6 text-lg font-semibold text-[#ce1127]">
+            <div className="w-2/3 mx-auto mb-20 text-center">
+              <p className="mt-6 text-lg font-semibold text-[#1785c6]" data-aos="fade-up">
                 Where Heritage, Values, and Education Unite
               </p>
-              <h2 className="font-libre mt-2 text-3xl font-bold tracking-tight text-gray-900">
+              <h2 className="font-rammetto mt-2 text-4xl text-gray-900" data-aos="fade-up">
                 Exploring the Pillars of our Language School
               </h2>
             </div>
             <div className="grid max-w-xl grid-cols-1 gap-x-20 gap-y-10 lg:max-w-none lg:grid-cols-3 lg:gap-y-16">
               {features.map((feature) => (
-                <div key={feature.name} className="relative">
-                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#ce1127] text-white mb-5">
+                <div key={feature.name} className="relative" data-aos="zoom-in">
+                  <div className="flex h-20 w-20 items-center justify-center rounded-full bg-[#1785c6] text-white mb-5">
                     <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-10 h-10">
                       <path strokeLinecap="round" strokeLinejoin="round" d="M4.26 10.147a60.438 60.438 0 0 0-.491 6.347A48.62 48.62 0 0 1 12 20.904a48.62 48.62 0 0 1 8.232-4.41 60.46 60.46 0 0 0-.491-6.347m-15.482 0a50.636 50.636 0 0 0-2.658-.813A59.906 59.906 0 0 1 12 3.493a59.903 59.903 0 0 1 10.399 5.84c-.896.248-1.783.52-2.658.814m-15.482 0A50.717 50.717 0 0 1 12 13.489a50.702 50.702 0 0 1 7.74-3.342M6.75 15a.75.75 0 1 0 0-1.5.75.75 0 0 0 0 1.5Zm0 0v-3.675A55.378 55.378 0 0 1 12 8.443m-7.007 11.55A5.981 5.981 0 0 0 6.75 15.75v-1.5" />
                     </svg>
                   </div>
-                  <p className="font-libre text-xl font-semibold leading-7 text-gray-900 mb-4">
+                  <p className="font-rammetto text-xl leading-7 text-gray-400 mb-4">
                     {feature.name}
                   </p>
                   <p className="text-base leading-7 text-gray-600">{feature.description}</p>
@@ -244,16 +277,16 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="bg-[#013893] relative py-32">
+        <section className="bg-[#ed3d36] relative py-32 overflow-hidden z-10">
           <div className="container">
             <div className='w-2/3 mx-auto mb-20 text-center'>
-              <h2 className="text-xl font-semibold text-white">Our Teachers</h2>
-              <p className="font-libre mt-2 text-3xl font-bold tracking-tight text-white">
+              <h2 className="text-xl font-semibold text-white" data-aos="fade-up">Our Teachers</h2>
+              <p className="font-rammetto mt-2 text-4xl text-white" data-aos="fade-up">
                 Meet The Team
               </p>
             </div>
             <div className="flex flex-wrap -mx-4">
-              <div className="w-1/4 px-4">
+              <div className="w-1/4 px-4" data-aos="zoom-in">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/images/teacher1.jpg" // Assuming your image is in public/images
@@ -261,10 +294,10 @@ export default function Component() {
                     width={398}
                     height={600}
                   />
-                  <p className="text-xl leading-none text-center bg-[#fdd116] text-black font-bold py-5 -mt-2">Teacher 1</p>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5 -mt-2">Teacher 1</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4">
+              <div className="w-1/4 px-4" data-aos="zoom-in">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/images/teacher2.jpg" // Assuming your image is in public/images
@@ -272,10 +305,10 @@ export default function Component() {
                     width={398}
                     height={600}
                   />
-                  <p className="text-xl leading-none text-center bg-[#ce1127] text-white font-bold py-5 -mt-2">Teacher 2</p>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5 -mt-2">Teacher 2</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4">
+              <div className="w-1/4 px-4" data-aos="zoom-in">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/images/teacher3.jpg" // Assuming your image is in public/images
@@ -283,10 +316,10 @@ export default function Component() {
                     width={398}
                     height={600}
                   />
-                  <p className="text-xl leading-none text-center bg-[#fdd116] text-black font-bold py-5 -mt-2">Teacher 3</p>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5 -mt-2">Teacher 3</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4">
+              <div className="w-1/4 px-4" data-aos="zoom-in">
                 <div className="rounded-xl overflow-hidden">
                   <Image
                     src="/images/teacher4.jpg" // Assuming your image is in public/images
@@ -294,30 +327,83 @@ export default function Component() {
                     width={398}
                     height={600}
                   />
-                  <p className="text-xl leading-none text-center bg-[#ce1127] text-white font-bold py-5 -mt-2">Teacher 4</p>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5 -mt-2">Teacher 4</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className="relative py-32">
+        <section className='relative py-32'>
+          <div className='container'>
+            <div className='w-2/3 mx-auto mb-20 text-center'>
+              <h2 className="text-xl font-semibold" data-aos="fade-up">Our Testimonials</h2>
+              <p className="font-rammetto mt-2 text-4xl" data-aos="fade-up">
+                Reviews from Our Happy Parents and Students
+              </p>
+            </div>
+            <div className='grid grid-cols-3 gap-10'>
+              {testimonials.map((review, index) => (
+                <div key={review.title} className='bg-white border border-gray-100 shadow-sm rounded-2xl p-8' data-aos="zoom-in">
+                  <div className='flex flex-unwrap items-center justify-between gap-x-3 mb-10'>
+                    <div className='flex rounded-ful text-yellow-500'>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                      </svg>
+                      <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
+                        <path fillRule="evenodd" d="M10.788 3.21c.448-1.077 1.976-1.077 2.424 0l2.082 5.006 5.404.434c1.164.093 1.636 1.545.749 2.305l-4.117 3.527 1.257 5.273c.271 1.136-.964 2.033-1.96 1.425L12 18.354 7.373 21.18c-.996.608-2.231-.29-1.96-1.425l1.257-5.273-4.117-3.527c-.887-.76-.415-2.212.749-2.305l5.404-.434 2.082-5.005Z" clipRule="evenodd" />
+                      </svg>
+                    </div>
+                    <div>
+                      <Image
+                        src="/images/google-symbol.png" // Assuming your image is in public/images
+                        alt="Description"
+                        width={24}
+                        height={24}
+                      />
+                    </div>
+                  </div>
+                  <p className='font-rammetto text-xl text-gray-400 mb-3 leading-none'>{review.testimonialsSection.subject}</p>
+                  <div className='mb-8' dangerouslySetInnerHTML={{ __html: review.content }} />
+                  <div className='flex flex-unwrap gap-x-3'>
+                    <div className={`flex items-center justify-center h-10 w-10 rounded-full ${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-[#ed3d36]'} text-white font-bold text-xl`}>{review.title[0]}</div>
+                    <div>
+                      <p className='mb-1 leading-none font-medium'>{review.title}</p>
+                      <p className='mb-0 leading-none text-sm'>{new Date(review.date).toLocaleDateString()}</p>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+          </div>
+        </section>
+
+        <section className="relative pb-32">
           <div className="container">
-            <div className="flex flex-wrap items-center bg-[#ce1127] text-white rounded-xl overflow-hidden">
+            <div className="flex flex-wrap items-center bg-[#1785c6] text-white rounded-xl overflow-hidden">
               <div className="w-1/2 p-20">
-                <p className="font-libre mt-2 text-3xl font-bold tracking-tight">
+                <p className="font-rammetto mt-2 text-4xl" data-aos="fade-right">
                   Enroll Today for an Immersive Cultural Journey
                 </p>
-                <p className="mt-10 text-lg">
+                <p className="mt-10 text-lg" data-aos="fade-right">
                   Join our vibrant community language school and embark on a transformative educational journey. Immerse yourself in the richness of Nepalese culture, language, and traditions. Enroll now to be a part of an inclusive community dedicated to preserving heritage and fostering global understanding.
                 </p>
                 <Link href="#">
-                  <a className="inline-block rounded-full bg-[#fdd116]  px-8 py-3 mt-10 font-bold text-black shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                  <a data-aos="fade-right" className="inline-block rounded-full bg-[#fdd116]  px-8 py-3 mt-10 font-bold text-black shadow-sm hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                     Start Learning
                   </a>
                 </Link>
               </div>
-              <div className="w-1/2">
+              <div className="w-1/2" data-aos="fade-left">
                 <Image
                   src="/images/get-started.jpg" // Assuming your image is in public/images
                   alt="Description"
@@ -329,90 +415,7 @@ export default function Component() {
           </div>
         </section>
 
-        {/* <section className='relative pt-32 md:pt-48 overflow-hidden'>
-          <div className='container'>
-            <div className='flex flex-wrap'>
-              <div className='w-1/2'>
-                <div className='bg-white p-10'>
-                  <p className='font-libre text-3xl font-bold leading-none'>Testimonials</p>
-                </div>
-              </div>
-            </div>
-          </div>
-          <div className='absolute left-0 top-0 w-full h-full -z-10'>
-            <Image
-              src="/images/testimonials.jpg" // Assuming your image is in public/images
-              alt="Description"
-              className='!h-full !w-full object-cover'
-              width={1920}
-              height={1000}
-            />
-          </div>
-        </section> */}
-        <button onClick={goToTop}>Go To Top</button>
-
-        <section className="bg-[#013893] text-white relative py-32">
-          <div className="container">
-            <div className="flex flex-wrap">
-              <div className="w-full lg:w-1/2">
-                <p className="text-3xl font-bold">Pathshala</p>
-                <article className="pt-5 md:w-10/12">Our institution is a vibrant hub dedicated to preserving and promoting the rich heritage of the Nepalese community. With a diverse curriculum that encompasses language, traditions, and global perspectives, we provide an immersive learning experience.</article>
-              </div>
-
-              <div className="w-full lg:w-1/2 flex flex-wrap gap-y-6">
-                <div className="w-1/2 md:w-1/3">
-                  <p className="font-barlow font-semibold text-xl">Quick Links</p>
-                  <div className="menu-quick-links-container">
-                    <ul className="navbar-nav flex flex-col gap-y-3 pt-5">
-                      <li><a href="#" className="text-white text-base">About Us</a></li>
-                      <li><a href="#" className="text-white text-base">News & Events</a></li>
-                      <li><a href="#" className="text-white text-base">Testimonials</a></li>
-                      <li><a href="#" className="text-white text-base">Admissions</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="w-1/2 md:w-1/3">
-                  <p className="font-barlow font-semibold text-xl">Resources</p>
-                  <div className="menu-resources-container">
-                    <ul className="navbar-nav flex flex-col gap-y-3 pt-5">
-                      <li><a target="_blank" rel="noopener" href="#" className="text-white text-base">Privacy Policy</a></li>
-                      <li><a href="#" className="text-white text-base">Terms and Conditions</a></li>
-                    </ul>
-                  </div>
-                </div>
-                <div className="w-1/2 md:w-1/3">
-                  <p className="font-barlow font-semibold text-xl">Contacts</p>
-                  <ul className="font-thin pt-5 flex flex-col gap-y-3">
-                    <li><a href="tel:1300 000 000" className="flex gap-x-2">
-                      <div className="w-fit">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M2.25 6.75c0 8.284 6.716 15 15 15h2.25a2.25 2.25 0 0 0 2.25-2.25v-1.372c0-.516-.351-.966-.852-1.091l-4.423-1.106c-.44-.11-.902.055-1.173.417l-.97 1.293c-.282.376-.769.542-1.21.38a12.035 12.035 0 0 1-7.143-7.143c-.162-.441.004-.928.38-1.21l1.293-.97c.363-.271.527-.734.417-1.173L6.963 3.102a1.125 1.125 0 0 0-1.091-.852H4.5A2.25 2.25 0 0 0 2.25 4.5v2.25Z" />
-                        </svg>
-                      </div>
-                      1300 000 000</a></li>
-                    <li><a href="mailto:info@pathshala.org.au" className="flex gap-x-2">
-                      <div className="w-fit">
-                        <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                          <path strokeLinecap="round" strokeLinejoin="round" d="M21.75 6.75v10.5a2.25 2.25 0 0 1-2.25 2.25h-15a2.25 2.25 0 0 1-2.25-2.25V6.75m19.5 0A2.25 2.25 0 0 0 19.5 4.5h-15a2.25 2.25 0 0 0-2.25 2.25m19.5 0v.243a2.25 2.25 0 0 1-1.07 1.916l-7.5 4.615a2.25 2.25 0 0 1-2.36 0L3.32 8.91a2.25 2.25 0 0 1-1.07-1.916V6.75" />
-                        </svg>
-                      </div>
-                      info@pathshala.org.au</a></li>
-                    <li>
-                      <a href="https://www.google.com/search?q=21 Holliday Ave, Edmondson Park NSW 2174" target='_blank' className="flex gap-x-2">
-                        <div className="w-fit">
-                          <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth="1.5" stroke="currentColor" className="w-6 h-6">
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M15 10.5a3 3 0 1 1-6 0 3 3 0 0 1 6 0Z" />
-                            <path strokeLinecap="round" strokeLinejoin="round" d="M19.5 10.5c0 7.142-7.5 11.25-7.5 11.25S4.5 17.642 4.5 10.5a7.5 7.5 0 1 1 15 0Z" />
-                          </svg>
-                        </div>
-                        21 Holliday Ave, Edmondson Park NSW 2174</a></li>
-                  </ul>
-                </div>
-              </div>
-            </div>
-          </div>
-        </section>
-
+        <FooterMenu />
       </Main >
       <Footer title={siteTitle} menuItems={footerMenu} />
     </>
@@ -425,6 +428,7 @@ Component.query = gql`
   query GetPageData(
     $headerLocation: MenuLocationEnum
     $footerLocation: MenuLocationEnum
+    $pageId: ID!
   ) {
     generalSettings {
       ...BlogInfoFragment
@@ -439,6 +443,35 @@ Component.query = gql`
         ...NavigationMenuItemFragment
       }
     }
+    testimonials {
+      nodes {
+        title
+        testimonialsSection {
+          subject
+        }
+        content
+        date
+      }
+    }
+    page(id: $pageId, idType: DATABASE_ID) {
+      bannerFields {
+        heading
+        subHeading
+      },
+      frontPage {
+        whyUs {
+          description
+          heading
+          subHeading
+          image {
+            node {
+              altText
+              sourceUrl
+            }
+          }
+        }
+      }
+    }
   }
 `;
 
@@ -446,5 +479,6 @@ Component.variables = () => {
   return {
     headerLocation: MENUS.PRIMARY_LOCATION,
     footerLocation: MENUS.FOOTER_LOCATION,
+    pageId: "14" // Replace with the actual page ID
   };
 };

@@ -18,9 +18,9 @@ export default function EntryHeader({ title, image, date, author, className }) {
       )}
 
       {hasText && (
-        <div className={cx('text', { 'has-image': image })}>
+        <div className={`bg-[#1785c6] text-white py-32 ${cx('text', { 'has-image': image })}`}>
           <Container>
-            {!!title && <Heading className={cx('title')}>{title}</Heading>}
+            {!!title && <Heading className='font-rammetto text-5xl'>{title}</Heading>}
             <PostInfo
               className={cx('byline')}
               author={author}

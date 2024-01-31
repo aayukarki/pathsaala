@@ -3,6 +3,7 @@ export { ContentWrapper } from './ContentWrapper';
 export { EntryHeader } from './EntryHeader';
 export { FeaturedImage } from './FeaturedImage';
 export { Footer } from './Footer';
+export { FooterMenu} from './FooterMenu';
 export { FormatDate } from './FormatDate';
 export { Header } from './Header';
 export { Heading } from './Heading';
