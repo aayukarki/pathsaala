@@ -8,7 +8,7 @@ export default function Footer({ title, menuItems }) {
   const year = new Date().getFullYear();
 
   return (
-    <footer className="bg-[#ed3d36] text-white pb-10">
+    <footer className="bg-orange text-white pb-10">
       <div className="container">
         <div className='flex justify-between text-sm'>
           {/* <NavigationMenu menuItems={menuItems} /> */}

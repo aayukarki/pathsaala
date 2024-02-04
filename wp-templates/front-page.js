@@ -98,11 +98,13 @@ export default function Component() {
   return (
     <>
       <SEO title={siteTitle} description={siteDescription} />
+
       <Header
         title={siteTitle}
         description={siteDescription}
         menuItems={primaryMenu}
       />
+
       <Main>
         <section className="relative bg-[#1785c6] text-white py-32 md:py-44 z-10 overflow-hidden">
           <div className="container">
@@ -113,7 +115,7 @@ export default function Component() {
                 <p className="mt-10 mb-0 text-lg" data-aos="fade-right">{subHeading}</p>
                 <div className='flex flex-unwrap gap-x-4'>
                   <Link href="#">
-                    <a data-aos="fade-right" className="w-[180px] text-center inline-block rounded-full bg-[#ed3d36] p-3 mt-10 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                    <a data-aos="fade-right" className="w-[180px] text-center inline-block rounded-full bg-orange p-3 mt-10 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                       Enrol Now
                     </a>
                   </Link>
@@ -128,7 +130,7 @@ export default function Component() {
                 {/* <p className='text-3xl leading-none bg-white text-black text-center font-bold rounded-full py-4 mb-8 flex justify-center items-center gap-x-2'>नेपाली वर्णमाला (Nepali Alphabet)</p>
                 <div className="flex flex-wrap -mx-4">
                   <div className='w-1/2 px-4'>
-                    <div className='bg-[#ed3d36] text-black rounded-3xl p-5 overflow-hidden'>
+                    <div className='bg-orange text-black rounded-3xl p-5 overflow-hidden'>
                       <Slider {...settings}>
                         <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>अ</p>
                         <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>आ</p>
@@ -140,7 +142,7 @@ export default function Component() {
                     </div>
                   </div>
                   <div className='w-1/2 px-4'>
-                    <div className='bg-[#ed3d36] text-black rounded-3xl p-5 overflow-hidden'>
+                    <div className='bg-orange text-black rounded-3xl p-5 overflow-hidden'>
                       <Slider {...settings}>
                         <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>क</p>
                         <p className='text-[200px] leading-none font-bold text-white text-center py-3 mb-0'>ख</p>
@@ -209,38 +211,41 @@ export default function Component() {
             />
           </div>
         </section>
-        <section className="bg-gray-100 relative py-32">
+
+        <section className="bg-gray-100 relative py-20 md:py-32">
           <div className="container">
-            <div className="w-2/3 mx-auto mb-20 text-center">
-              <p className="mt-6 text-lg font-semibold text-[#ed3d36]" data-aos="fade-up">
+            <div className="w-full md:w-2/3 mx-auto mb-20 text-center">
+              <p className="mt-6 text-lg font-semibold text-orange" data-aos="fade-up">
                 What We Offer
               </p>
-              <h2 className="font-rammetto mt-2 text-4xl text-gray-900" data-aos="fade-up">
+              <h2 className="font-rammetto mt-2 text-2xl md:text-4xl text-gray-900" data-aos="fade-up">
                 Language, Culture Learning and Community Bond
               </h2>
             </div>
-            <div className="flex flex-unwrap gap-x-10">
+            <div className="flex flex-wrap gap-y-5">
               {whyUs.map((value, index) => (
-                <div key={value.heading} className={`w-1/3 ${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-[#ed3d36]'} text-white rounded-xl overflow-hidden`} data-aos="zoom-in">
-                  <div className="flex flex-col">
-                    <div className="w-full h-[260px] overflow-hidden">
-                      <Image
-                        src={value.image.node.sourceUrl}
-                        alt={value.image.node.altText || 'Description'}
-                        className="w-full h-full object-cover"
-                        width={640}
-                        height
-                        ={945}
-                      />
-                    </div>
-                    <div className="w-full p-10">
-                      <p className="text-lg font-semibold leading-none">
-                        {value.subHeading}
-                      </p>
-                      <p className="font-rammetto text-2xl leading-none">
-                        {value.heading}
-                      </p>
-                      <div dangerouslySetInnerHTML={{ __html: value.description }} />
+                <div key={value.heading} className='w-full md:w-1/3 md:px-5'>
+                  <div className={`${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-orange'} text-white rounded-xl overflow-hidden`} data-aos="zoom-in">
+                    <div className="flex flex-col">
+                      <div className="w-full h-[260px] overflow-hidden">
+                        <Image
+                          src={value.image.node.sourceUrl}
+                          alt={value.image.node.altText || 'Description'}
+                          className="w-full h-full object-cover"
+                          width={640}
+                          height
+                          ={945}
+                        />
+                      </div>
+                      <div className="w-full py-10 px-3 md:px-10">
+                        <p className="text-base md:text-lg font-semibold leading-none">
+                          {value.subHeading}
+                        </p>
+                        <p className="font-rammetto text-xl md:text-2xl leading-none">
+                          {value.heading}
+                        </p>
+                        <div className="text-sm md:text-base" dangerouslySetInnerHTML={{ __html: value.description }} />
+                      </div>
                     </div>
                   </div>
                 </div>
@@ -249,13 +254,13 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="relative py-32">
+        <section className="relative py-20 md:py-32">
           <div className="container">
-            <div className="w-2/3 mx-auto mb-20 text-center">
+            <div className="w-full md:w-2/3 mx-auto mb-20 text-center">
               <p className="mt-6 text-lg font-semibold text-[#1785c6]" data-aos="fade-up">
                 Where Heritage, Values, and Education Unite
               </p>
-              <h2 className="font-rammetto mt-2 text-4xl text-gray-900" data-aos="fade-up">
+              <h2 className="font-rammetto mt-2 text-2xl md:text-4xl text-gray-900" data-aos="fade-up">
                 Exploring the Pillars of our Language School
               </h2>
             </div>
@@ -277,74 +282,92 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="bg-[#ed3d36] relative py-32 overflow-hidden z-10">
+        <section className="bg-orange relative py-20 md:py-32 overflow-hidden z-10">
           <div className="container">
-            <div className='w-2/3 mx-auto mb-20 text-center'>
-              <h2 className="text-xl font-semibold text-white" data-aos="fade-up">Our Teachers</h2>
-              <p className="font-rammetto mt-2 text-4xl text-white" data-aos="fade-up">
+            <div className='w-full md:w-2/3 mx-auto text-center'>
+              <h2 className="text-lg md:text-xl font-semibold text-white" data-aos="fade-up">Our Teachers</h2>
+              <p className="font-rammetto mt-2 text-2xl md:text-4xl text-white" data-aos="fade-up">
                 Meet The Team
               </p>
             </div>
-            <div className="flex flex-wrap -mx-4">
-              <div className="w-1/4 px-4" data-aos="zoom-in">
-                <div className="rounded-xl overflow-hidden">
-                  <Image
-                    src="/images/teacher1.jpg" // Assuming your image is in public/images
-                    alt="Description"
-                    width={398}
-                    height={600}
-                  />
-                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5 -mt-2">Teacher 1</p>
+
+            <div className="flex flex-wrap -mx-2 md:-mx-4 gap-y-3 mt-10 md:mt-20">
+              <div className="w-1/2 md:w-1/4 px-1 md:px-4" data-aos="zoom-in">
+                <div className="rounded-xl overflow-hidden h-full flex flex-col">
+                  <div className='flex-grow'>
+                    <Image
+                      src="/images/teacher1.jpg" // Assuming your image is in public/images
+                      alt="Description"
+                      className='object-cover h-full w-full'
+                      width={398}
+                      height={600}
+                    />
+                  </div>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5">Teacher 1</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4" data-aos="zoom-in">
-                <div className="rounded-xl overflow-hidden">
-                  <Image
-                    src="/images/teacher2.jpg" // Assuming your image is in public/images
-                    alt="Description"
-                    width={398}
-                    height={600}
-                  />
-                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5 -mt-2">Teacher 2</p>
+
+              <div className="w-1/2 md:w-1/4 px-1 md:px-4" data-aos="zoom-in">
+                <div className="rounded-xl overflow-hidden h-full flex flex-col">
+                  <div className='flex-grow'>
+                    <Image
+                      src="/images/teacher2.jpg" // Assuming your image is in public/images
+                      alt="Description"
+                      className='object-cover h-full w-full'
+                      width={398}
+                      height={600}
+                    />
+                  </div>
+
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5">Teacher 2</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4" data-aos="zoom-in">
-                <div className="rounded-xl overflow-hidden">
-                  <Image
-                    src="/images/teacher3.jpg" // Assuming your image is in public/images
-                    alt="Description"
-                    width={398}
-                    height={600}
-                  />
-                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5 -mt-2">Teacher 3</p>
+
+              <div className="w-1/2 md:w-1/4 px-1 md:px-4" data-aos="zoom-in">
+                <div className="rounded-xl overflow-hidden h-full flex flex-col">
+                  <div className='flex-grow'>
+                    <Image
+                      src="/images/teacher3.jpg" // Assuming your image is in public/images
+                      alt="Description"
+                      className='object-cover h-full w-full'
+                      width={398}
+                      height={600}
+                    />
+                  </div>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#fdd116] text-black py-5">Teacher 3</p>
                 </div>
               </div>
-              <div className="w-1/4 px-4" data-aos="zoom-in">
-                <div className="rounded-xl overflow-hidden">
-                  <Image
-                    src="/images/teacher4.jpg" // Assuming your image is in public/images
-                    alt="Description"
-                    width={398}
-                    height={600}
-                  />
-                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5 -mt-2">Teacher 4</p>
+
+              <div className="w-1/2 md:w-1/4 px-1 md:px-4" data-aos="zoom-in">
+                <div className="rounded-xl overflow-hidden h-full flex flex-col">
+                  <div className='flex-grow'>
+                    <Image
+                      src="/images/teacher4.jpg" // Assuming your image is in public/images
+                      alt="Description"
+                      className='object-cover h-full w-full'
+                      width={398}
+                      height={600}
+                    />
+                  </div>
+                  <p className="font-rammetto text-xl leading-none text-center bg-[#1785c6] text-white py-5">Teacher 4</p>
                 </div>
               </div>
             </div>
           </div>
         </section>
 
-        <section className='relative py-32'>
+        <section className='relative py-20 md:py-32'>
           <div className='container'>
-            <div className='w-2/3 mx-auto mb-20 text-center'>
+            <div className='w-full md:w-2/3 mx-auto text-center'>
               <h2 className="text-xl font-semibold" data-aos="fade-up">Our Testimonials</h2>
-              <p className="font-rammetto mt-2 text-4xl" data-aos="fade-up">
+              <p className="font-rammetto mt-2 text-2xl md:text-4xl" data-aos="fade-up">
                 Reviews from Our Happy Parents and Students
               </p>
             </div>
-            <div className='grid grid-cols-3 gap-10'>
+
+            <div className='grid grid-cols-1 md:grid-cols-3 gap-y-5 md:gap-10 mt-10 md:mt-20'>
               {testimonials.map((review, index) => (
-                <div key={review.title} className='bg-white border border-gray-100 shadow-sm rounded-2xl p-8' data-aos="zoom-in">
+                <div key={index} className='bg-white border border-gray-100 shadow-sm rounded-2xl py-8 px-4 md:px-8' data-aos="zoom-in">
                   <div className='flex flex-unwrap items-center justify-between gap-x-3 mb-10'>
                     <div className='flex rounded-ful text-yellow-500'>
                       <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24" fill="currentColor" className="w-6 h-6">
@@ -372,10 +395,10 @@ export default function Component() {
                       />
                     </div>
                   </div>
-                  <p className='font-rammetto text-xl text-gray-400 mb-3 leading-none'>{review.testimonialsSection.subject}</p>
-                  <div className='mb-8' dangerouslySetInnerHTML={{ __html: review.content }} />
+                  <p className='font-rammetto text-lg md:text-xl text-gray-400 mb-3 leading-none'>{review.testimonialsSection.subject}</p>
+                  <div className='text-sm md:text-base mb-8' dangerouslySetInnerHTML={{ __html: review.content }} />
                   <div className='flex flex-unwrap gap-x-3'>
-                    <div className={`flex items-center justify-center h-10 w-10 rounded-full ${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-[#ed3d36]'} text-white font-bold text-xl`}>{review.title[0]}</div>
+                    <div className={`flex items-center justify-center h-10 w-10 rounded-full ${index % 2 === 0 ? 'bg-[#1785c6]' : 'bg-orange'} text-white font-bold text-xl`}>{review.title[0]}</div>
                     <div>
                       <p className='mb-1 leading-none font-medium'>{review.title}</p>
                       <p className='mb-0 leading-none text-sm'>{new Date(review.date).toLocaleDateString()}</p>
@@ -387,14 +410,14 @@ export default function Component() {
           </div>
         </section>
 
-        <section className="relative pb-32">
+        <section className="relative pb-20 md:pb-32">
           <div className="container">
             <div className="flex flex-wrap items-center bg-[#1785c6] text-white rounded-xl overflow-hidden">
-              <div className="w-1/2 p-20">
-                <p className="font-rammetto mt-2 text-4xl" data-aos="fade-right">
+              <div className="w-full md:w-1/2 py-10 px-4 md:p-20">
+                <p className="font-rammetto text-2xl md:text-4xl" data-aos="fade-right">
                   Enroll Today for an Immersive Cultural Journey
                 </p>
-                <p className="mt-10 text-lg" data-aos="fade-right">
+                <p className="mt-7 md:mt-10 text-base md:text-lg" data-aos="fade-right">
                   Join our vibrant community language school and embark on a transformative educational journey. Immerse yourself in the richness of Nepalese culture, language, and traditions. Enroll now to be a part of an inclusive community dedicated to preserving heritage and fostering global understanding.
                 </p>
                 <Link href="#">
@@ -403,7 +426,8 @@ export default function Component() {
                   </a>
                 </Link>
               </div>
-              <div className="w-1/2" data-aos="fade-left">
+
+              <div className="w-full md:w-1/2" data-aos="fade-left">
                 <Image
                   src="/images/get-started.jpg" // Assuming your image is in public/images
                   alt="Description"

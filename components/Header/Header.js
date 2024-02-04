@@ -18,7 +18,7 @@ export default function Header({
     <header className="relative py-5 shadow-md shadow-gray-100">
       <SkipNavigationLink />
       <div className='container'>
-        <div className="flex justify-between items-center">
+        <div className="flex flex-wrap justify-between items-center">
           <div className={`flex flex-row items-center ${cx('brand')}`}>
             <Image
               src="/images/logo.png" // Assuming your image is in public/images
@@ -38,9 +38,10 @@ export default function Header({
             className={cx(['primary-navigation', isNavShown ? 'show' : undefined])}
             menuItems={menuItems}
           />
+
           <div>
             <Link href="/contact-us/">
-              <a className="inline-block rounded-full bg-[#ed3d36] px-8 py-3 font-bold text-white shadow-sm  hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+              <a className="hidden md:flex justify-center items-center h-[50px] rounded-full bg-orange py-2 px-8 font-bold text-white shadow-sm  hover:bg-[#ce1127] focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
                 Contact Us</a>
             </Link>
             <button

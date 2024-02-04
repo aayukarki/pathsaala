@@ -4,31 +4,33 @@ import Image from 'next/future/image';
 export default function FooterMenu() {
 
     return (
-        <section className="bg-[#ed3d36] text-white relative py-32">
+        <section className="bg-orange text-white relative py-20 md:py-32">
             <div className="container">
-                <div className="flex flex-wrap items-center justify-between pb-32">
+                <div className="flex flex-wrap items-center justify-between pb-20 md:pb-32 gap-y-5">
                     <div className="w-full lg:w-6/12">
-                        <p className='font-rammetto text-4xl'>Embark on Your Cultural Journey with Us</p>
-                        <p className='text-lg'>Explore Language, Embrace Heritage, and Connect Globally</p>
+                        <p className='font-rammetto text-2xl md:text-4xl'>Embark on Your Cultural Journey with Us</p>
+                        <p className='text-base md:text-lg'>Explore Language, Embrace Heritage, and Connect Globally</p>
                     </div>
                     <div className="w-full lg:w-5/12">
-                        <div className='flex flex-unwrap gap-x-5'>
-                            <div className="w-full lg:w-6/12">
-                                <Link href="#">
-                                    <a className="text-xl block text-center rounded-full bg-[#1785c6] px-8 py-4 font-bold shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        Admissions</a>
+                        <div className='flex flex-wrap gap-y-4'>
+                            <div className="w-1/2 px-1 md:px-2">
+                                <Link href="#" passHref>
+                                    <a className="h-[48px] md:h-[60px] text-base flex items-center justify-center md:text-xl text-center rounded-full bg-[#1785c6] p-2 font-bold shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        Admissions
+                                    </a>
                                 </Link>
                             </div>
-                            <div className="w-full lg:w-6/12">
-                                <Link href="#">
-                                    <a className="text-xl block text-center rounded-full border-2 border-white px-8 py-4 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
-                                        Contact Us</a>
+                            <div className="w-1/2 px-1">
+                                <Link href="#" passHref>
+                                    <a className="h-[48px] md:h-[60px] flex items-center justify-center text-base md:text-xl text-center rounded-full border-2 border-white p-2 font-bold text-white shadow-sm hover:text-black hover:bg-white focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-indigo-600">
+                                        Contact Us
+                                    </a>
                                 </Link>
                             </div>
                         </div>
                     </div>
                 </div>
-                <div className="flex flex-wrap">
+                <div className="flex flex-wrap gap-y-10">
                     <div className="w-full lg:w-5/12">
                         <div className='flex flex-row items-center'>
                             <Image
